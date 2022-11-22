@@ -46,14 +46,17 @@ def soo():
             # if we received a message, replace the <SEP> 
             # token with ": " for nice printing
                 msg = msg.replace(separator_token, ": ")
+                jsons = datetime.now().strftime('%Y-%m-%d | %H:%M:%S')+msg
+                file = open("data.txt","a+")
+                file.write((jsons)+"\n")
+                file.close()
         # iterate over all connected sockets
             for client_socket in client_sockets:
             # and send the message
                 msgs = "["+ datetime.now().strftime('%H:%M:%S') +"] " +msg 
                 jsons = {datetime.now().strftime('%Y-%m-%d | %H:%M:%S'):msgs}
-                file = open("data.txt","a+")
-                file.write((jsons)+"\n")
-                file.close()
+                
+                
                 client_socket.send(msgs.encode())
 
 
@@ -75,8 +78,8 @@ def soo():
         		l.append(password)
         	l.reverse()
         	for client_socket in client_sockets:
-        		for i in l:
-        			msgs=i
+        		for i in range(10):
+        			msgs=l[i]
         			client_socket.send(msgs.encode())
         
     # start a new thread that listens for each client's messages
