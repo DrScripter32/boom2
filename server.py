@@ -62,6 +62,12 @@ def soo():
         client_socket, client_address = s.accept()
         print(f"[+] {client_address} connected.")
         #////send 10 last mess
+
+        
+        
+        
+    # add the new connected client to connected sockets
+        client_sockets.add(client_socket)
         p = open("data.txt")
         for client_socket in client_sockets:
         	for password in p:
@@ -73,11 +79,6 @@ def soo():
         			msgs=i
         			client_socket.send(msgs.encode())
         
-        
-        
-        
-    # add the new connected client to connected sockets
-        client_sockets.add(client_socket)
     # start a new thread that listens for each client's messages
         t = Thread(target=listen_for_client, args=(client_socket,))
     # make the thread daemon so it ends whenever the main thread ends
