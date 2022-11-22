@@ -70,7 +70,7 @@ def soo():
         	l.reverse()
         	for client_socket in client_sockets:
         		for i in l:
-        			msgs=l[i]
+        			msgs=i
         			client_socket.send(msgs.encode())
         
         
